@@ -120,7 +120,7 @@ def callback():
     if request.method == 'POST':
     # get X-Line-Signature header value
 
-       signature = request.META['HTTP_X_Line_Signature']
+       signature = request.headers['X-Line-Signature']
        body = request.body.decode('utf-8')
 
 
