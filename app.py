@@ -130,9 +130,9 @@ def callback():
         events = parser.parse(body, signature)
            # get request body as text
     except InvalidSignatureError:
-        return 'Forbidden'
+        return 'OK'
     except LineBotApiError:
-        return 'BadRequest' #handler.handle(body, signature)
+        return 'OK' #handler.handle(body, signature)
         for event in events:
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
@@ -149,7 +149,7 @@ def callback():
                         sendPosition(event)
                     if mtext == '@快速選單':
                         sendQuickreply(event)
-        return 'HttpResponse'
+        return 'OK'
     
 
 #訊息傳遞區塊
