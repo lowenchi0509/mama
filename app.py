@@ -22,43 +22,42 @@ parser  = WebhookParser(YOUR_CHANNEL_SECRET)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
+ 
 def callback():
+    if request.method == 'POST':
     # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
 
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+       signature = request.META['HTTP_X_Line_Signature']
+       body = request.body.decode('utf-8')
+
+
 
     # handle webhook body
-    try:
-          events = parser.parse(body, signature)
-    except InvalidSignatureError:
-        abort(400)
 
-    return 'OK'
-    for event in events:
+    try:
+        events = parser.parse(body, signature)
+           # get request body as text
+    except InvalidSignatureError:
+        return HttpResponseForbidden()
+    except LineBotApiError:
+        return HttpResponseBadRequest() #handler.handle(body, signature)
+        for event in events:
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
                     mtext = event.message.text
                     if mtext == '@傳送文字':
                         func.sendText(event)
-    
                     elif mtext == '@傳送圖片':
                         func.sendImage(event)
-    
                     elif mtext == '@傳送貼圖':
                         func.sendStick(event)
-    
                     elif mtext == '@多項傳送':
                         func.sendMulti(event)
-    
                     elif mtext == '@傳送位置':
                         func.sendPosition(event)
-    
                     if mtext == '@快速選單':
                         func.sendQuickreply(event)
-    return HttpResponse()
+        return HttpResponse()
 
 #訊息傳遞區塊
 @handler.add(MessageEvent, message=TextMessage)
