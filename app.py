@@ -1,6 +1,6 @@
-from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from django.views.decorators.csrf import csrf_exempt
+#from django.conf import settings
+#from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+#from django.views.decorators.csrf import csrf_exempt
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage
