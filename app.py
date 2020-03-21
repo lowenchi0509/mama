@@ -47,7 +47,9 @@ def callback():
                     mtext = event.message.text
                     if mtext == '@傳送文字':
                         func.sendText(event)
-                    elif mtext == '@傳送圖片':
+                        message = TextSendMessage(text=event.message.text+'mmdf')
+                        line_bot_api.reply_message(event.reply_token,message)
+                     elif mtext == '@傳送圖片':
                         func.sendImage(event)
                     elif mtext == '@傳送貼圖':
                         func.sendStick(event)
