@@ -21,19 +21,14 @@ parser  = WebhookParser(YOUR_CHANNEL_SECRET)
 #line_bot_api.push_message('Ub8e3cf75739079f25a50f82b2cbd4c63', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/callback", methods=['POST'])
- 
+#@app.route("/callback", methods=['POST'])
+@csrf_exempt 
 def callback():
     if request.method == 'POST':
     # get X-Line-Signature header value
-
        signature = request.META['HTTP_X_Line_Signature']
        body = request.body.decode('utf-8')
-
-
-
     # handle webhook body
-
     try:
         events = parser.parse(body, signature)
            # get request body as text
