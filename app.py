@@ -114,7 +114,7 @@ def sendQuickreply(event):  #快速選單
 
 # 監聽所有來自 /callback 的 Post Request
 
-#@app.route("/callback", methods=['POST'])
+@app.route("/callback", methods=['GET', 'POST'])
 def callback():
     if request.method == 'POST':
     # get X-Line-Signature header value
