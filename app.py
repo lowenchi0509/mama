@@ -16,7 +16,7 @@ YOUR_CHANNEL_ACCESS_TOKEN = os.environ["ChannelAccessToken"]
 YOUR_CHANNEL_SECRET = os.environ["ChannelSecret"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-
+parser  = WebhookParser(YOUR_CHANNEL_SECRET)
 #line_bot_api.push_message('Ub8e3cf75739079f25a50f82b2cbd4c63', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
@@ -31,7 +31,7 @@ def callback():
 
     # handle webhook body
     try:
-        handler.handle(body, signature)
+          events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
 
