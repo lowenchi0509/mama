@@ -36,6 +36,28 @@ def callback():
         abort(400)
 
     return 'OK'
+    for event in events:
+            if isinstance(event, MessageEvent):
+                if isinstance(event.message, TextMessage):
+                    mtext = event.message.text
+                    if mtext == '@傳送文字':
+                        func.sendText(event)
+    
+                    elif mtext == '@傳送圖片':
+                        func.sendImage(event)
+    
+                    elif mtext == '@傳送貼圖':
+                        func.sendStick(event)
+    
+                    elif mtext == '@多項傳送':
+                        func.sendMulti(event)
+    
+                    elif mtext == '@傳送位置':
+                        func.sendPosition(event)
+    
+                    if mtext == '@快速選單':
+                        func.sendQuickreply(event)
+    return HttpResponse()
 
 #訊息傳遞區塊
 @handler.add(MessageEvent, message=TextMessage)
