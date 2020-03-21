@@ -121,8 +121,7 @@ def callback():
     # get X-Line-Signature header value
 
        signature = request.headers['X-Line-Signature']
-       body = request.body.decode('utf-8')
-
+       body = request.get_data(as_text=True)
 
 
     # handle webhook body
