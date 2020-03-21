@@ -9,6 +9,7 @@ from module import func
 from flask import Flask, request, abort
 from linebot import WebhookHandler
 from linebot.models import *
+from linebot.models import TextSendMessage
 
 app = Flask(__name__)
 import os
