@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -10,22 +9,13 @@ from linebot import WebhookHandler
 from linebot.models import *
 
 from linebot.models import TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, QuickReply, QuickReplyButton, MessageAction
-
-
-app = Flask(__name__)
-
 import os
-
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["ChannelAccessToken"]
-
 YOUR_CHANNEL_SECRET = os.environ["ChannelSecret"]
-
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 parser  = WebhookParser(YOUR_CHANNEL_SECRET)
-
-
+app = Flask(__name__)
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
